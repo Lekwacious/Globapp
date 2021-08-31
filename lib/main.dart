@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/settings.dart';
+import 'package:globapp/screens/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 
       ),
       debugShowCheckedModeBanner: false,
-      home: SettingsScreen(),
+      home: HomeScreen(),
     );
   }
 }
