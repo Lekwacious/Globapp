@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:globapp/data/sembast_codec.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sembast/sembast.dart';
@@ -10,6 +11,7 @@ class SembastDb {
   DatabaseFactory dbFactory = databaseFactoryIo;
   late Database _database;
   final store = intMapStoreFactory.store("passwords");
+  var codec = getEncryptSembastCodec(password: "Password");
   static SembastDb _singleton = SembastDb._internal();
   SembastDb._internal() {}
 
@@ -26,7 +28,7 @@ class SembastDb {
   Future _openDb() async {
     final docsDir = await getApplicationDocumentsDirectory();
     final dbPath = join(docsDir.path, 'pass.db');
-    final db = await dbFactory.openDatabase(dbPath);
+    final db = await dbFactory.openDatabase(dbPath, codec: codec);
     return db;
   }
 
